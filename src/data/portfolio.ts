@@ -41,6 +41,8 @@ export interface Project {
     color: string
     /** Dark cards set their text in white. */
     dark: boolean
+    /** The device mockup exported from the design, on a transparent background. */
+    image: { src: string; alt: string }
 }
 
 export interface Testimonial {
@@ -255,6 +257,10 @@ export const portfolio = {
         items: [
             {
                 name: 'Elimu Bora ERP',
+                image: {
+                    src: '/images/projects/elimu-bora.webp',
+                    alt: 'Elimu Bora ERP on a laptop and a phone',
+                },
                 description:
                     'Elimu Bora ERP is a school management platform built for Kenyan schools, bringing academics, attendance, fees, inventory, and parent communication together in one system.',
                 href: projectUrls.elimuBora,
@@ -263,6 +269,10 @@ export const portfolio = {
             },
             {
                 name: 'Sales Zote',
+                image: {
+                    src: '/images/projects/sales-zote.webp',
+                    alt: 'Sales Zote app screens on two phones',
+                },
                 description:
                     'Sales Zote is a cloud-based POS and inventory management system built to streamline operations for retail, wholesale, and growing chain businesses.',
                 href: projectUrls.salesZote,
@@ -271,6 +281,10 @@ export const portfolio = {
             },
             {
                 name: 'Hovit',
+                image: {
+                    src: '/images/projects/hovit.webp',
+                    alt: 'Hovit app screens on two phones',
+                },
                 description:
                     'Hovit is a feature-rich house-hunting app designed to simplify every step of the renting journey. It entails 4 platforms; Hovit App, H Agent App and H Mover App and a web platform.',
                 href: projectUrls.hovit,
@@ -279,6 +293,10 @@ export const portfolio = {
             },
             {
                 name: 'Mr Ticketz',
+                image: {
+                    src: '/images/projects/mr-ticketz.webp',
+                    alt: 'Mr Ticketz app screens on two phones',
+                },
                 description:
                     'MR TICKETZ is a modern ticketing platform with a dedicated mobile app designed specifically for event promoters.',
                 href: projectUrls.mrTicketz,
@@ -287,6 +305,10 @@ export const portfolio = {
             },
             {
                 name: 'Jahazi',
+                image: {
+                    src: '/images/projects/jahazi.webp',
+                    alt: 'Jahazi app screens on two phones',
+                },
                 description:
                     'JAHAZI is a mobile-first lending platform designed to offer accessible, transparent borrowing solutions in regions underserved by traditional financial systems.',
                 color: '#f4c542',
