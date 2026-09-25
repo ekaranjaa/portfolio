@@ -1,0 +1,28 @@
+---
+import '@/styles/global.css'
+import Head from './Head.astro'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+
+interface Props {
+    title?: string
+    description?: string
+}
+
+const { title, description } = Astro.props
+
+// The html scroll padding matches the sticky navbar so anchored sections aren't hidden under it.
+---
+
+<!doctype html>
+<html lang="en" class="scroll-pt-28 motion-safe:scroll-smooth lg:scroll-pt-32">
+    <Head title={title} description={description} />
+
+    <body class="bg-primary/20">
+        <Navbar client:load />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

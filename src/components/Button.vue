@@ -6,7 +6,7 @@
     const props = withDefaults(
         defineProps<{
             color?: Color
-            size?: 'md' | 'lg'
+            size?: 'sm' | 'md' | 'lg'
             iconOnly?: boolean
             type?: 'button' | 'submit' | 'reset'
             href?: string
@@ -31,13 +31,22 @@
 
     // Icons inside the button are sized here so call sites never repeat it.
     const SIZE_CLASSES = {
+        sm: 'text-2xl [&_svg]:size-6',
         md: 'text-3xl [&_svg]:size-8',
         lg: 'text-4xl [&_svg]:size-10',
     } as const
 
+    const PADDING_CLASSES = {
+        sm: 'px-4 py-2',
+        md: 'px-6 py-3',
+        lg: 'px-6 py-3',
+    } as const
+
     const colorClasses = computed(() => COLOR_CLASSES[props.color])
     const sizeClasses = computed(() => SIZE_CLASSES[props.size])
-    const paddingClasses = computed(() => (props.iconOnly ? 'p-3.5 lg:p-5' : 'px-6 py-3'))
+    const paddingClasses = computed(() =>
+        props.iconOnly ? 'p-3.5 lg:p-5' : PADDING_CLASSES[props.size],
+    )
 </script>
 
 <template>
