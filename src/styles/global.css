@@ -35,7 +35,7 @@
     /* The testimonials badge turns slowly using Tailwind's own spin keyframes */
     --animate-spin-slow: spin 20s linear infinite;
 
-    /* The hero tags bob gently; it animates transform so the cursor-follow translate still applies */
+    /* The hero tags bob gently; GSAP moves their outer wrapper, so the two never compete */
     --animate-float: float 4s ease-in-out infinite;
 
     @keyframes float {

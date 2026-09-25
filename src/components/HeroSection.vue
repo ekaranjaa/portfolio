@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import { onMounted, onUnmounted, reactive } from 'vue'
+    import { onMounted, onUnmounted } from 'vue'
+    import gsap from 'gsap'
     import Button from '@/components/Button.vue'
     import Tag from '@/components/Tag.vue'
     import CursorIcon from '@/icons/CursorIcon.vue'
@@ -11,8 +12,9 @@
     /**
      * Where each tag sits on the photo and how its cursor points at it, in hero.tags order.
      * Offsets come from the design; the desktop overhangs stay within the container padding.
-     * Each tag floats out of step with the others (float) and follows the mouse by its own
-     * distance in px at the section's edges (depth), so the three read as layered.
+     * Each tag floats out of step with the others (float), drifts toward the mouse by its own
+     * distance in px at the section's edges (depth), and springs back over its own time in
+     * seconds (duration), so the three read as layered objects with different weights.
      */
     const TAG_PLACEMENTS = [
         {
@@ -21,6 +23,7 @@
             pointer: '-scale-y-100 rotate-36',
             float: '',
             depth: 20,
+            duration: 1.5,
         },
         {
             tag: '-left-5 top-3/5 xl:-left-29 xl:top-9/16',
@@ -28,6 +31,7 @@
             pointer: '-scale-y-100 -rotate-144',
             float: '[animation-delay:-1.4s]',
             depth: 28,
+            duration: 1.8,
         },
         {
             tag: '-right-4.5 top-8/9 xl:top-7/8',
@@ -35,40 +39,71 @@
             pointer: '-rotate-36',
             float: '[animation-delay:-2.7s]',
             depth: 12,
+            duration: 1.2,
         },
     ]
 
-    /** The mouse's offset from the section's centre, -1 to 1 on each axis; 0 at rest. */
-    const pointer = reactive({ x: 0, y: 0 })
-    let frame = 0
-    let followsPointer = false
+    /** px of throw per px/ms of cursor speed, so fast flicks fling the tags further. */
+    const THROW = 25
+    const MAX_THROW = 60
+    /** ms the cursor must rest before the throw falls away and the tags settle. */
+    const SETTLE_DELAY = 150
+
+    const tagElements: HTMLElement[] = []
+    let context: gsap.Context | undefined
+    let movers: { x: gsap.QuickToFunc; y: gsap.QuickToFunc }[] = []
+    let lastMove: { x: number; y: number; time: number } | undefined
+    let settleTimer: ReturnType<typeof setTimeout> | undefined
 
     onMounted(() => {
-        followsPointer = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+        context = gsap.context(() => {
+            movers = tagElements.map((element, index) => {
+                const vars = {
+                    duration: TAG_PLACEMENTS[index].duration,
+                    ease: 'elastic.out(1, 0.35)',
+                }
+                return { x: gsap.quickTo(element, 'x', vars), y: gsap.quickTo(element, 'y', vars) }
+            })
+        })
     })
 
-    onUnmounted(() => cancelAnimationFrame(frame))
+    onUnmounted(() => {
+        clearTimeout(settleTimer)
+        context?.revert()
+    })
 
-    function onPointerMove(event: PointerEvent) {
-        // Touch has no hover cursor to follow, so tags only float there.
-        if (!followsPointer || event.pointerType !== 'mouse') return
-        const section = event.currentTarget as HTMLElement
-        cancelAnimationFrame(frame)
-        frame = requestAnimationFrame(() => {
-            const rect = section.getBoundingClientRect()
-            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-            pointer.y = ((event.clientY - rect.top) / rect.height) * 2 - 1
+    /** Sends each tag toward its drift for the pointer's position plus a throw from its speed. */
+    function drift(offsetX: number, offsetY: number, speedX = 0, speedY = 0) {
+        const clampThrow = gsap.utils.clamp(-MAX_THROW, MAX_THROW)
+        movers.forEach((mover, index) => {
+            const { depth } = TAG_PLACEMENTS[index]
+            mover.x(offsetX * depth + clampThrow(speedX * THROW))
+            mover.y(offsetY * depth + clampThrow(speedY * THROW))
         })
     }
 
-    function onPointerLeave() {
-        cancelAnimationFrame(frame)
-        pointer.x = 0
-        pointer.y = 0
+    function onPointerMove(event: PointerEvent) {
+        // Touch has no hover cursor to follow, so tags only float there.
+        if (!movers.length || event.pointerType !== 'mouse') return
+        const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
+        // The pointer's offset from the section's centre, -1 to 1 on each axis.
+        const offsetX = ((event.clientX - rect.left) / rect.width) * 2 - 1
+        const offsetY = ((event.clientY - rect.top) / rect.height) * 2 - 1
+        const elapsed = lastMove ? Math.max(event.timeStamp - lastMove.time, 1) : 1
+        const speedX = lastMove ? (event.clientX - lastMove.x) / elapsed : 0
+        const speedY = lastMove ? (event.clientY - lastMove.y) / elapsed : 0
+        lastMove = { x: event.clientX, y: event.clientY, time: event.timeStamp }
+
+        drift(offsetX, offsetY, speedX, speedY)
+        clearTimeout(settleTimer)
+        settleTimer = setTimeout(() => drift(offsetX, offsetY), SETTLE_DELAY)
     }
 
-    function followStyle(depth: number) {
-        return { translate: `${pointer.x * depth}px ${pointer.y * depth}px` }
+    function onPointerLeave() {
+        clearTimeout(settleTimer)
+        lastMove = undefined
+        drift(0, 0)
     }
 
     const CURSOR_COLORS: Record<HeroTag['color'], string> = {
@@ -127,21 +162,26 @@
                 />
             </div>
 
-            <!-- The float animates transform while following the mouse sets translate,
-                 so the two combine instead of overriding each other. -->
+            <!-- GSAP moves the outer element and the float runs on the inner one, so the two
+                 never compete for the same transform. -->
             <div
                 v-for="(tag, index) in hero.tags"
                 :key="tag.label"
-                class="absolute animate-float transition-[translate] duration-500 ease-out motion-reduce:animate-none"
-                :class="[TAG_PLACEMENTS[index].tag, TAG_PLACEMENTS[index].float]"
-                :style="followStyle(TAG_PLACEMENTS[index].depth)"
+                :ref="(element) => (tagElements[index] = element as HTMLElement)"
+                class="absolute"
+                :class="TAG_PLACEMENTS[index].tag"
             >
-                <Tag :color="tag.color">{{ tag.label }}</Tag>
                 <div
-                    class="absolute flex size-9 items-center justify-center"
-                    :class="[TAG_PLACEMENTS[index].cursor, CURSOR_COLORS[tag.color]]"
+                    class="relative animate-float motion-reduce:animate-none"
+                    :class="TAG_PLACEMENTS[index].float"
                 >
-                    <CursorIcon class="w-6" :class="TAG_PLACEMENTS[index].pointer" />
+                    <Tag :color="tag.color">{{ tag.label }}</Tag>
+                    <div
+                        class="absolute flex size-9 items-center justify-center"
+                        :class="[TAG_PLACEMENTS[index].cursor, CURSOR_COLORS[tag.color]]"
+                    >
+                        <CursorIcon class="w-6" :class="TAG_PLACEMENTS[index].pointer" />
+                    </div>
                 </div>
             </div>
         </div>
