@@ -32,6 +32,8 @@
 
     /* The services marquee renders its list twice, so shifting by half loops seamlessly */
     --animate-marquee: marquee 40s linear infinite;
+    /* The testimonials badge turns slowly using Tailwind's own spin keyframes */
+    --animate-spin-slow: spin 20s linear infinite;
 
     @keyframes marquee {
         to {
