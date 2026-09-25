@@ -35,6 +35,19 @@
     /* The testimonials badge turns slowly using Tailwind's own spin keyframes */
     --animate-spin-slow: spin 20s linear infinite;
 
+    /* The hero tags bob gently; it animates transform so the cursor-follow translate still applies */
+    --animate-float: float 4s ease-in-out infinite;
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
     @keyframes marquee {
         to {
             transform: translateX(-50%);

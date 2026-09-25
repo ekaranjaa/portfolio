@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { onMounted, onUnmounted, reactive } from 'vue'
     import Button from '@/components/Button.vue'
     import Tag from '@/components/Tag.vue'
     import CursorIcon from '@/icons/CursorIcon.vue'
@@ -10,24 +11,65 @@
     /**
      * Where each tag sits on the photo and how its cursor points at it, in hero.tags order.
      * Offsets come from the design; the desktop overhangs stay within the container padding.
+     * Each tag floats out of step with the others (float) and follows the mouse by its own
+     * distance in px at the section's edges (depth), so the three read as layered.
      */
     const TAG_PLACEMENTS = [
         {
             tag: '-right-2.5 top-4 xl:right-5 xl:top-5',
             cursor: '-left-7 top-9',
             pointer: '-scale-y-100 rotate-36',
+            float: '',
+            depth: 20,
         },
         {
             tag: '-left-5 top-3/5 xl:-left-29 xl:top-9/16',
             cursor: '-right-7 -top-8',
             pointer: '-scale-y-100 -rotate-144',
+            float: '[animation-delay:-1.4s]',
+            depth: 28,
         },
         {
             tag: '-right-4.5 top-8/9 xl:top-7/8',
             cursor: '-left-6 -top-7.5',
             pointer: '-rotate-36',
+            float: '[animation-delay:-2.7s]',
+            depth: 12,
         },
     ]
+
+    /** The mouse's offset from the section's centre, -1 to 1 on each axis; 0 at rest. */
+    const pointer = reactive({ x: 0, y: 0 })
+    let frame = 0
+    let followsPointer = false
+
+    onMounted(() => {
+        followsPointer = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    })
+
+    onUnmounted(() => cancelAnimationFrame(frame))
+
+    function onPointerMove(event: PointerEvent) {
+        // Touch has no hover cursor to follow, so tags only float there.
+        if (!followsPointer || event.pointerType !== 'mouse') return
+        const section = event.currentTarget as HTMLElement
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => {
+            const rect = section.getBoundingClientRect()
+            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+            pointer.y = ((event.clientY - rect.top) / rect.height) * 2 - 1
+        })
+    }
+
+    function onPointerLeave() {
+        cancelAnimationFrame(frame)
+        pointer.x = 0
+        pointer.y = 0
+    }
+
+    function followStyle(depth: number) {
+        return { translate: `${pointer.x * depth}px ${pointer.y * depth}px` }
+    }
 
     const CURSOR_COLORS: Record<HeroTag['color'], string> = {
         'pink-accent': 'text-pink-accent',
@@ -39,6 +81,8 @@
 <template>
     <section
         class="container mx-auto flex flex-col-reverse gap-6 px-6 py-10 xl:flex-row xl:items-center xl:justify-between xl:pb-20"
+        @pointermove="onPointerMove"
+        @pointerleave="onPointerLeave"
     >
         <div class="flex flex-col gap-6 xl:max-w-152 xl:gap-10">
             <div class="flex flex-col gap-2 xl:gap-3">
@@ -83,11 +127,14 @@
                 />
             </div>
 
+            <!-- The float animates transform while following the mouse sets translate,
+                 so the two combine instead of overriding each other. -->
             <div
                 v-for="(tag, index) in hero.tags"
                 :key="tag.label"
-                class="absolute"
-                :class="TAG_PLACEMENTS[index].tag"
+                class="absolute animate-float transition-[translate] duration-500 ease-out motion-reduce:animate-none"
+                :class="[TAG_PLACEMENTS[index].tag, TAG_PLACEMENTS[index].float]"
+                :style="followStyle(TAG_PLACEMENTS[index].depth)"
             >
                 <Tag :color="tag.color">{{ tag.label }}</Tag>
                 <div
