@@ -79,6 +79,7 @@ export const portfolio = {
         title: 'Product Developer',
         description:
             'I design and build digital products; bringing together product thinking, user experience, and engineering to turn ideas into useful, well-crafted software.',
+        image: { src: '/images/hero.webp', alt: 'Emmanuel Karanja' },
         tags: [
             { label: 'UI/UX Designer', color: 'pink-accent' },
             { label: 'Software Developer', color: 'blue-accent' },
