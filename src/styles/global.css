@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-primary: #f4c542;
+  --color-pink-accent: #e054b6;
+  --color-blue-accent: #467cd1;
+  --color-green-accent: #166b51;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-github: #000000;
+  --color-linkedin: #0b66c2;
+  --color-instagram: #dd2a7b;
+  --color-focus: #4975e9;
+
+  --shadow-*: initial;
+  --shadow-xs: 2px 2px 0 0 #000;    /* tags */
+  --shadow-sm: 4px 4px 0 0 #000;    /* button hover/focus */
+  --shadow-md: 6px 6px 0 0 #000;    /* buttons */
+  --shadow-lg: 8px 8px 0 0 #000;    /* hero arch */
+  --shadow-xl: 12px 12px 0 0 #000;  /* cards */
+
+  /* Fluid between the 393px and 1440px artboards */
+  --text-2xl: clamp(1.25rem, 1.1562rem + 0.3820vw, 1.5rem);   /* 20 → 24 */
+  --text-2xl--line-height: 1.4;
+  --text-3xl: 2rem;                                             /* 32 */
+  --text-3xl--line-height: 1.4;
+  --text-4xl: clamp(2rem, 1.8123rem + 0.7641vw, 2.5rem);       /* 32 → 40 */
+  --text-4xl--line-height: 1.4;
+  --text-8xl: clamp(6.125rem, 5.7966rem + 1.3372vw, 7rem);     /* 98 → 112 */
+}
+
+@theme inline {
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-lova);
+}
+
+@layer base {
+  /* Focus/Blue ring for links and everything else; buttons opt out with outline-hidden */
+  :focus-visible { outline: 4px solid var(--color-focus); outline-offset: 2px; }
+}
