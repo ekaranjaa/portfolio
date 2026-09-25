@@ -1,33 +1,35 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config'
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from '@tailwindcss/vite'
 
-import vue from '@astrojs/vue';
+import vue from '@astrojs/vue'
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  },
-
-  integrations: [vue()],
-
-  fonts: [
-    {
-      provider: fontProviders.fontsource(),
-      name: "Space Grotesk",
-      cssVariable: "--font-space-grotesk",
-      weights: [400, 500, 700],
-      styles: ["normal"],
+    vite: {
+        plugins: [tailwindcss()],
     },
-    {
-      provider: fontProviders.local(),
-      name: "Lova Bold",
-      cssVariable: "--font-lova",
-      options: {
-        variants: [{ src: ["./src/assets/fonts/LovaBold.otf"], weight: 400, style: "normal" }],
-      },
-    },
-  ],
-});
+
+    integrations: [vue()],
+
+    fonts: [
+        {
+            provider: fontProviders.fontsource(),
+            name: 'Space Grotesk',
+            cssVariable: '--font-space-grotesk',
+            weights: [400, 500, 700],
+            styles: ['normal'],
+        },
+        {
+            provider: fontProviders.local(),
+            name: 'Lova Bold',
+            cssVariable: '--font-lova',
+            options: {
+                variants: [
+                    { src: ['./src/assets/fonts/LovaBold.otf'], weight: 400, style: 'normal' },
+                ],
+            },
+        },
+    ],
+})

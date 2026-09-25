@@ -25,26 +25,28 @@
 
 ## File Map
 
-| File | Responsibility | Tasks |
-|---|---|---|
-| `src/components/Welcome.astro`, `src/assets/astro.svg`, `src/assets/background.svg` | Astro starter content: deleted | 1 |
-| `src/pages/index.astro` | Home page: an empty `<Layout />` until components exist | 1 |
-| `astro.config.mjs` | Vite plugin (Tailwind), integrations (Vue), fonts | 2, 3, 4 |
-| `src/styles/global.css` | Tailwind import and all design tokens | 2, 4 |
-| `src/layouts/Layout.astro` | Document shell: global CSS, `<Font />` tags, page background | 2, 4 |
-| `package.json`, `package-lock.json` | Dependencies added by `astro add` | 2, 3 |
-| `src/assets/fonts/LovaBold.otf` | Display font file (already on disk, untracked) | 4 |
-| `src/pages/specimen.astro` | **Temporary** verification page, never committed | 5 |
+| File                                                                                | Responsibility                                               | Tasks   |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------- |
+| `src/components/Welcome.astro`, `src/assets/astro.svg`, `src/assets/background.svg` | Astro starter content: deleted                               | 1       |
+| `src/pages/index.astro`                                                             | Home page: an empty `<Layout />` until components exist      | 1       |
+| `astro.config.mjs`                                                                  | Vite plugin (Tailwind), integrations (Vue), fonts            | 2, 3, 4 |
+| `src/styles/global.css`                                                             | Tailwind import and all design tokens                        | 2, 4    |
+| `src/layouts/Layout.astro`                                                          | Document shell: global CSS, `<Font />` tags, page background | 2, 4    |
+| `package.json`, `package-lock.json`                                                 | Dependencies added by `astro add`                            | 2, 3    |
+| `src/assets/fonts/LovaBold.otf`                                                     | Display font file (already on disk, untracked)               | 4       |
+| `src/pages/specimen.astro`                                                          | **Temporary** verification page, never committed             | 5       |
 
 ---
 
 ### Task 1: Remove the Astro starter content
 
 **Files:**
+
 - Delete: `src/components/Welcome.astro`, `src/assets/astro.svg`, `src/assets/background.svg`
 - Modify: `src/pages/index.astro` (whole file)
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `src/pages/index.astro` renders `<Layout />` with no children. Later tasks rely on this minimal page.
 
@@ -71,7 +73,7 @@ Replace the whole of `src/pages/index.astro` with:
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout />
@@ -102,16 +104,18 @@ EOF
 ### Task 2: Add Tailwind CSS and the theme tokens
 
 **Files:**
+
 - Modify (by command): `astro.config.mjs`, `package.json`, `package-lock.json`
 - Create (by command, then overwrite): `src/styles/global.css`
 - Modify: `src/layouts/Layout.astro`
 
 **Interfaces:**
+
 - Consumes: the minimal `index.astro` from Task 1.
 - Produces:
-  - Tailwind utilities for: colours `primary`, `pink-accent`, `blue-accent`, `green-accent`, `white`, `black`, `github`, `linkedin`, `instagram`, `focus`; shadows `shadow-xs|sm|md|lg|xl`; tuned sizes `text-2xl|3xl|4xl|8xl`.
-  - A base `:focus-visible` ring.
-  - `Layout.astro` imports `../styles/global.css`, and `<body>` has `class="bg-primary/20"`.
+    - Tailwind utilities for: colours `primary`, `pink-accent`, `blue-accent`, `green-accent`, `white`, `black`, `github`, `linkedin`, `instagram`, `focus`; shadows `shadow-xs|sm|md|lg|xl`; tuned sizes `text-2xl|3xl|4xl|8xl`.
+    - A base `:focus-visible` ring.
+    - `Layout.astro` imports `../styles/global.css`, and `<body>` has `class="bg-primary/20"`.
 
 - [ ] **Step 1: Write the failing check**
 
@@ -133,6 +137,7 @@ npx astro add tailwind --yes
 ```
 
 Expected:
+
 - `astro.config.mjs` now imports `tailwindcss from '@tailwindcss/vite'` and has `vite: { plugins: [tailwindcss()] }`.
 - `src/styles/global.css` exists containing `@import "tailwindcss";`.
 
@@ -143,41 +148,44 @@ Inspect with `git diff astro.config.mjs && cat src/styles/global.css`. Leave the
 Replace the whole file with the following. The `@theme inline` font mapping is added in Task 4, together with the fonts.
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-*: initial;
-  --color-primary: #f4c542;
-  --color-pink-accent: #e054b6;
-  --color-blue-accent: #467cd1;
-  --color-green-accent: #166b51;
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-github: #000000;
-  --color-linkedin: #0b66c2;
-  --color-instagram: #dd2a7b;
-  --color-focus: #4975e9;
+    --color-*: initial;
+    --color-primary: #f4c542;
+    --color-pink-accent: #e054b6;
+    --color-blue-accent: #467cd1;
+    --color-green-accent: #166b51;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-github: #000000;
+    --color-linkedin: #0b66c2;
+    --color-instagram: #dd2a7b;
+    --color-focus: #4975e9;
 
-  --shadow-*: initial;
-  --shadow-xs: 2px 2px 0 0 #000;    /* tags */
-  --shadow-sm: 4px 4px 0 0 #000;    /* button hover/focus */
-  --shadow-md: 6px 6px 0 0 #000;    /* buttons */
-  --shadow-lg: 8px 8px 0 0 #000;    /* hero arch */
-  --shadow-xl: 12px 12px 0 0 #000;  /* cards */
+    --shadow-*: initial;
+    --shadow-xs: 2px 2px 0 0 #000; /* tags */
+    --shadow-sm: 4px 4px 0 0 #000; /* button hover/focus */
+    --shadow-md: 6px 6px 0 0 #000; /* buttons */
+    --shadow-lg: 8px 8px 0 0 #000; /* hero arch */
+    --shadow-xl: 12px 12px 0 0 #000; /* cards */
 
-  /* Fluid between the 393px and 1440px artboards */
-  --text-2xl: clamp(1.25rem, 1.1562rem + 0.3820vw, 1.5rem);   /* 20 → 24 */
-  --text-2xl--line-height: 1.4;
-  --text-3xl: 2rem;                                             /* 32 */
-  --text-3xl--line-height: 1.4;
-  --text-4xl: clamp(2rem, 1.8123rem + 0.7641vw, 2.5rem);       /* 32 → 40 */
-  --text-4xl--line-height: 1.4;
-  --text-8xl: clamp(6.125rem, 5.7966rem + 1.3372vw, 7rem);     /* 98 → 112 */
+    /* Fluid between the 393px and 1440px artboards */
+    --text-2xl: clamp(1.25rem, 1.1562rem + 0.382vw, 1.5rem); /* 20 → 24 */
+    --text-2xl--line-height: 1.4;
+    --text-3xl: 2rem; /* 32 */
+    --text-3xl--line-height: 1.4;
+    --text-4xl: clamp(2rem, 1.8123rem + 0.7641vw, 2.5rem); /* 32 → 40 */
+    --text-4xl--line-height: 1.4;
+    --text-8xl: clamp(6.125rem, 5.7966rem + 1.3372vw, 7rem); /* 98 → 112 */
 }
 
 @layer base {
-  /* Focus/Blue ring for links and everything else; buttons opt out with outline-hidden */
-  :focus-visible { outline: 4px solid var(--color-focus); outline-offset: 2px; }
+    /* Focus/Blue ring for links and everything else; buttons opt out with outline-hidden */
+    :focus-visible {
+        outline: 4px solid var(--color-focus);
+        outline-offset: 2px;
+    }
 }
 ```
 
@@ -187,22 +195,22 @@ Replace the whole of `src/layouts/Layout.astro` with the following. The starter'
 
 ```astro
 ---
-import '../styles/global.css';
+import '../styles/global.css'
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body class="bg-primary/20">
-		<slot />
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Astro Basics</title>
+    </head>
+    <body class="bg-primary/20">
+        <slot />
+    </body>
 </html>
 ```
 
@@ -236,10 +244,12 @@ EOF
 ### Task 3: Add the Vue integration
 
 **Files:**
+
 - Modify (by command): `astro.config.mjs`, `package.json`, `package-lock.json`
 - Temporary (created and deleted within this task): `src/components/VueProbe.vue`, an edit to `src/pages/index.astro`
 
 **Interfaces:**
+
 - Consumes: Tailwind from Task 2. The probe checks that Tailwind scans `.vue` files.
 - Produces: `integrations: [vue()]` in `astro.config.mjs`. `.vue` components can be rendered from `.astro` files.
 
@@ -249,7 +259,7 @@ Create `src/components/VueProbe.vue`:
 
 ```vue
 <template>
-	<p class="text-3xl font-bold">vue-probe-ok</p>
+    <p class="text-3xl font-bold">vue-probe-ok</p>
 </template>
 ```
 
@@ -257,12 +267,12 @@ Replace `src/pages/index.astro` with:
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
-import VueProbe from '../components/VueProbe.vue';
+import Layout from '../layouts/Layout.astro'
+import VueProbe from '../components/VueProbe.vue'
 ---
 
 <Layout>
-	<VueProbe />
+    <VueProbe />
 </Layout>
 ```
 
@@ -300,7 +310,7 @@ Replace `src/pages/index.astro` with the Task 1 version:
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout />
@@ -332,16 +342,18 @@ EOF
 ### Task 4: Load the fonts with the Astro Fonts API
 
 **Files:**
+
 - Modify: `astro.config.mjs` (the `astro/config` import line and a new `fonts` key)
 - Modify: `src/layouts/Layout.astro` (frontmatter and `<head>`)
 - Modify: `src/styles/global.css` (append the `@theme inline` block)
 - Add to git: `src/assets/fonts/LovaBold.otf` (already on disk)
 
 **Interfaces:**
+
 - Consumes: `global.css` and `Layout.astro` from Task 2, and the config from Tasks 2 and 3.
 - Produces:
-  - CSS variables `--font-space-grotesk` and `--font-lova`.
-  - Tailwind utilities `font-sans` (the page default, Space Grotesk 400/500/700) and `font-display` (Lova Bold 400).
+    - CSS variables `--font-space-grotesk` and `--font-lova`.
+    - Tailwind utilities `font-sans` (the page default, Space Grotesk 400/500/700) and `font-display` (Lova Bold 400).
 
 - [ ] **Step 1: Write the failing check**
 
@@ -369,13 +381,13 @@ Expected: `FAIL: fonts not wired`.
 Change the import line from:
 
 ```js
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 ```
 
 to:
 
 ```js
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config'
 ```
 
 Add a `fonts` key to the object passed to `defineConfig`, next to the existing `vite` and `integrations` keys. Leave those keys unchanged.
@@ -404,38 +416,40 @@ The whole file should now look like this. Key order and blank lines may differ d
 
 ```js
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config'
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from '@tailwindcss/vite'
 
-import vue from '@astrojs/vue';
+import vue from '@astrojs/vue'
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  },
-
-  integrations: [vue()],
-
-  fonts: [
-    {
-      provider: fontProviders.fontsource(),
-      name: "Space Grotesk",
-      cssVariable: "--font-space-grotesk",
-      weights: [400, 500, 700],
-      styles: ["normal"],
+    vite: {
+        plugins: [tailwindcss()],
     },
-    {
-      provider: fontProviders.local(),
-      name: "Lova Bold",
-      cssVariable: "--font-lova",
-      options: {
-        variants: [{ src: ["./src/assets/fonts/LovaBold.otf"], weight: 400, style: "normal" }],
-      },
-    },
-  ],
-});
+
+    integrations: [vue()],
+
+    fonts: [
+        {
+            provider: fontProviders.fontsource(),
+            name: 'Space Grotesk',
+            cssVariable: '--font-space-grotesk',
+            weights: [400, 500, 700],
+            styles: ['normal'],
+        },
+        {
+            provider: fontProviders.local(),
+            name: 'Lova Bold',
+            cssVariable: '--font-lova',
+            options: {
+                variants: [
+                    { src: ['./src/assets/fonts/LovaBold.otf'], weight: 400, style: 'normal' },
+                ],
+            },
+        },
+    ],
+})
 ```
 
 - [ ] **Step 4: Render the fonts in the layout**
@@ -444,16 +458,16 @@ In `src/layouts/Layout.astro`, change the frontmatter to:
 
 ```astro
 ---
-import { Font } from 'astro:assets';
-import '../styles/global.css';
+import { Font } from 'astro:assets'
+import '../styles/global.css'
 ---
 ```
 
 In `<head>`, add these two lines directly before `<title>`:
 
 ```astro
-		<Font cssVariable="--font-space-grotesk" preload />
-		<Font cssVariable="--font-lova" preload />
+<Font cssVariable="--font-space-grotesk" preload />
+<Font cssVariable="--font-lova" preload />
 ```
 
 - [ ] **Step 5: Map the fonts into Tailwind**
@@ -462,8 +476,8 @@ Add this block to `src/styles/global.css`, between the closing `}` of `@theme { 
 
 ```css
 @theme inline {
-  --font-sans: var(--font-space-grotesk);
-  --font-display: var(--font-lova);
+    --font-sans: var(--font-space-grotesk);
+    --font-display: var(--font-lova);
 }
 ```
 
@@ -494,9 +508,11 @@ EOF
 This task is verification only, and nothing from it is committed. It needs browser automation (Claude in Chrome: navigate, JavaScript, mouse, keyboard and screenshots). **Run it inline in the controlling session**, not in a subagent that lacks browser tools.
 
 **Files:**
+
 - Temporary: `src/pages/specimen.astro` (created, then deleted)
 
 **Interfaces:**
+
 - Consumes: every token, class and font from Tasks 2–4.
 - Produces: a pass/fail verification report. The working tree ends clean.
 
@@ -506,44 +522,84 @@ Create `src/pages/specimen.astro`. Every class is written out in full so that Ta
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout>
-	<main class="container mx-auto px-6 py-10 flex flex-col gap-10">
-		<h1 data-text="8xl" class="font-display text-8xl">Product developer</h1>
-		<p data-text="4xl" class="font-display text-4xl">Let’s talk</p>
-		<p data-text="3xl" class="text-3xl font-bold">Subhead 32 bold</p>
-		<p data-text="2xl" class="text-2xl">Body copy that is 20px on mobile and 24px on desktop.</p>
-		<p class="text-2xl font-medium">Nav link medium</p>
-		<p class="text-xl">Card body 20</p>
-		<p class="text-base font-bold leading-tight">Tag 16 bold</p>
+    <main class="container mx-auto px-6 py-10 flex flex-col gap-10">
+        <h1 data-text="8xl" class="font-display text-8xl">
+            Product developer
+        </h1>
+        <p data-text="4xl" class="font-display text-4xl">
+            Let’s talk
+        </p>
+        <p data-text="3xl" class="text-3xl font-bold">
+            Subhead 32 bold
+        </p>
+        <p data-text="2xl" class="text-2xl">
+            Body copy that is 20px on mobile and 24px on desktop.
+        </p>
+        <p class="text-2xl font-medium">Nav link medium</p>
+        <p class="text-xl">Card body 20</p>
+        <p class="text-base font-bold leading-tight">Tag 16 bold</p>
 
-		<div class="flex flex-wrap gap-6">
-			<div data-color="primary" class="size-20 border-4 border-black bg-primary"></div>
-			<div data-color="pink-accent" class="size-20 border-4 border-black bg-pink-accent"></div>
-			<div data-color="blue-accent" class="size-20 border-4 border-black bg-blue-accent"></div>
-			<div data-color="green-accent" class="size-20 border-4 border-black bg-green-accent"></div>
-			<div data-color="white" class="size-20 border-4 border-black bg-white"></div>
-			<div data-color="black" class="size-20 border-4 border-black bg-black"></div>
-			<div data-color="github" class="size-20 border-4 border-black bg-github"></div>
-			<div data-color="linkedin" class="size-20 border-4 border-black bg-linkedin"></div>
-			<div data-color="instagram" class="size-20 border-4 border-black bg-instagram"></div>
-			<div data-color="focus" class="size-20 border-4 border-black bg-focus"></div>
-			<div id="palette-probe" class="size-20 bg-red-500"></div>
-		</div>
+        <div class="flex flex-wrap gap-6">
+            <div data-color="primary" class="size-20 border-4 border-black bg-primary"></div>
+            <div
+                data-color="pink-accent"
+                class="size-20 border-4 border-black bg-pink-accent"
+            ></div>
+            <div
+                data-color="blue-accent"
+                class="size-20 border-4 border-black bg-blue-accent"
+            ></div>
+            <div
+                data-color="green-accent"
+                class="size-20 border-4 border-black bg-green-accent"
+            ></div>
+            <div data-color="white" class="size-20 border-4 border-black bg-white"></div>
+            <div data-color="black" class="size-20 border-4 border-black bg-black"></div>
+            <div data-color="github" class="size-20 border-4 border-black bg-github"></div>
+            <div data-color="linkedin" class="size-20 border-4 border-black bg-linkedin"></div>
+            <div data-color="instagram" class="size-20 border-4 border-black bg-instagram"></div>
+            <div data-color="focus" class="size-20 border-4 border-black bg-focus"></div>
+            <div id="palette-probe" class="size-20 bg-red-500"></div>
+        </div>
 
-		<div class="flex flex-wrap gap-10">
-			<div data-shadow="xs" class="size-20 border-2 border-black rounded-lg bg-white shadow-xs"></div>
-			<div data-shadow="sm" class="size-20 border-4 border-black rounded-xl bg-white shadow-sm"></div>
-			<div data-shadow="md" class="size-20 border-4 border-black rounded-xl bg-white shadow-md"></div>
-			<div data-shadow="lg" class="size-20 border-8 border-black rounded-t-full bg-pink-accent shadow-lg"></div>
-			<div data-shadow="xl" class="size-20 border-8 border-black rounded-3xl bg-primary shadow-xl"></div>
-		</div>
+        <div class="flex flex-wrap gap-10">
+            <div
+                data-shadow="xs"
+                class="size-20 border-2 border-black rounded-lg bg-white shadow-xs"
+            ></div>
+            <div
+                data-shadow="sm"
+                class="size-20 border-4 border-black rounded-xl bg-white shadow-sm"
+            ></div>
+            <div
+                data-shadow="md"
+                class="size-20 border-4 border-black rounded-xl bg-white shadow-md"
+            ></div>
+            <div
+                data-shadow="lg"
+                class="size-20 border-8 border-black rounded-t-full bg-pink-accent shadow-lg"
+            ></div>
+            <div
+                data-shadow="xl"
+                class="size-20 border-8 border-black rounded-3xl bg-primary shadow-xl"
+            ></div>
+        </div>
 
-		<a id="specimen-link" href="#" class="text-2xl text-blue-accent font-bold underline">Text link</a>
-		<button id="specimen-button" type="button" class="self-start font-display text-4xl border-4 border-black rounded-xl px-6 py-3 bg-primary text-black shadow-md outline-hidden transition hover:bg-blue-accent hover:shadow-sm focus-visible:bg-blue-accent focus-visible:shadow-sm">Let’s talk</button>
-	</main>
+        <a id="specimen-link" href="#" class="text-2xl text-blue-accent font-bold underline">
+            Text link
+        </a>
+        <button
+            id="specimen-button"
+            type="button"
+            class="self-start font-display text-4xl border-4 border-black rounded-xl px-6 py-3 bg-primary text-black shadow-md outline-hidden transition hover:bg-blue-accent hover:shadow-sm focus-visible:bg-blue-accent focus-visible:shadow-sm"
+        >
+            Let’s talk
+        </button>
+    </main>
 </Layout>
 ```
 
@@ -560,26 +616,31 @@ Expected: the status output reports a running server and its URL (default `http:
 Open `http://localhost:4321/specimen` in a new browser tab and run:
 
 ```js
-(async () => {
-  await document.fonts.ready;
-  const cs = (sel) => getComputedStyle(document.querySelector(sel));
-  return {
-    loadedFonts: [...document.fonts].filter((f) => f.status === 'loaded').map((f) => `${f.family} ${f.weight}`),
-    bodyFont: getComputedStyle(document.body).fontFamily,
-    displayFont: cs('[data-text="8xl"]').fontFamily,
-    bodyBg: getComputedStyle(document.body).backgroundColor,
-    primary: cs('[data-color="primary"]').backgroundColor,
-    focusColor: cs('[data-color="focus"]').backgroundColor,
-    paletteProbe: cs('#palette-probe').backgroundColor,
-    shadows: Object.fromEntries(['xs', 'sm', 'md', 'lg', 'xl'].map((s) => [s, cs(`[data-shadow="${s}"]`).boxShadow])),
-  };
+;(async () => {
+    await document.fonts.ready
+    const cs = (sel) => getComputedStyle(document.querySelector(sel))
+    return {
+        loadedFonts: [...document.fonts]
+            .filter((f) => f.status === 'loaded')
+            .map((f) => `${f.family} ${f.weight}`),
+        bodyFont: getComputedStyle(document.body).fontFamily,
+        displayFont: cs('[data-text="8xl"]').fontFamily,
+        bodyBg: getComputedStyle(document.body).backgroundColor,
+        primary: cs('[data-color="primary"]').backgroundColor,
+        focusColor: cs('[data-color="focus"]').backgroundColor,
+        paletteProbe: cs('#palette-probe').backgroundColor,
+        shadows: Object.fromEntries(
+            ['xs', 'sm', 'md', 'lg', 'xl'].map((s) => [s, cs(`[data-shadow="${s}"]`).boxShadow]),
+        ),
+    }
 })()
 ```
 
 Expected:
+
 - `loadedFonts`:
-  - includes Space Grotesk at 400, 500 and 700, and Lova Bold at 400
-  - the family names may carry an Astro suffix, but they must be the real fonts, not only fallbacks
+    - includes Space Grotesk at 400, 500 and 700, and Lova Bold at 400
+    - the family names may carry an Astro suffix, but they must be the real fonts, not only fallbacks
 - `bodyFont` starts with the Space Grotesk family, and `displayFont` starts with the Lova Bold family.
 - `bodyBg` is primary at 20% alpha, roughly `color(srgb 0.957 0.773 0.259 / 0.2)` or an `oklab(… / 0.2)` equivalent.
 - `primary` is `rgb(244, 197, 66)`.
@@ -592,44 +653,62 @@ Expected:
 Run this on the same page. It loads the specimen into offscreen iframes 393px and 1440px wide, so `vw` resolves to those widths.
 
 ```js
-(async () => {
-  const measure = (w) => new Promise((resolve) => {
-    const f = document.createElement('iframe');
-    f.style.cssText = `width:${w}px;height:800px;border:0;position:absolute;left:-99999px;top:0`;
-    f.src = '/specimen';
-    f.onload = () => {
-      const d = f.contentDocument;
-      const px = (sel) => parseFloat(getComputedStyle(d.querySelector(sel)).fontSize).toFixed(1);
-      resolve({ viewport: w, '2xl': px('[data-text="2xl"]'), '3xl': px('[data-text="3xl"]'), '4xl': px('[data-text="4xl"]'), '8xl': px('[data-text="8xl"]') });
-      f.remove();
-    };
-    document.body.append(f);
-  });
-  return [await measure(393), await measure(1440)];
+;(async () => {
+    const measure = (w) =>
+        new Promise((resolve) => {
+            const f = document.createElement('iframe')
+            f.style.cssText = `width:${w}px;height:800px;border:0;position:absolute;left:-99999px;top:0`
+            f.src = '/specimen'
+            f.onload = () => {
+                const d = f.contentDocument
+                const px = (sel) =>
+                    parseFloat(getComputedStyle(d.querySelector(sel)).fontSize).toFixed(1)
+                resolve({
+                    viewport: w,
+                    '2xl': px('[data-text="2xl"]'),
+                    '3xl': px('[data-text="3xl"]'),
+                    '4xl': px('[data-text="4xl"]'),
+                    '8xl': px('[data-text="8xl"]'),
+                })
+                f.remove()
+            }
+            document.body.append(f)
+        })
+    return [await measure(393), await measure(1440)]
 })()
 ```
 
 Expected (±0.1px):
+
 - 393px: `{ 2xl: 20.0, 3xl: 32.0, 4xl: 32.0, 8xl: 98.0 }`
 - 1440px: `{ 2xl: 24.0, 3xl: 32.0, 4xl: 40.0, 8xl: 112.0 }`
 
 - [ ] **Step 5: Check the button and focus states**
 
 1. Move the mouse over `#specimen-button` (real hover, using the browser tool), then run:
-   ```js
-   (() => { const s = getComputedStyle(document.querySelector('#specimen-button')); return [s.backgroundColor, s.boxShadow]; })()
-   ```
-   Expected: `rgb(70, 124, 209)` and a shadow of `rgb(0, 0, 0) 4px 4px 0px 0px`. Take a screenshot as evidence.
+    ```js
+    ;(() => {
+        const s = getComputedStyle(document.querySelector('#specimen-button'))
+        return [s.backgroundColor, s.boxShadow]
+    })()
+    ```
+    Expected: `rgb(70, 124, 209)` and a shadow of `rgb(0, 0, 0) 4px 4px 0px 0px`. Take a screenshot as evidence.
 2. Move the mouse away. Click an empty area of the page, then press `Tab` until `#specimen-link` is focused, and run:
-   ```js
-   (() => { const s = getComputedStyle(document.activeElement); return [document.activeElement.id, s.outlineStyle, s.outlineWidth, s.outlineColor]; })()
-   ```
-   Expected: `specimen-link`, `solid`, `4px`, `rgb(73, 117, 233)`.
+    ```js
+    ;(() => {
+        const s = getComputedStyle(document.activeElement)
+        return [document.activeElement.id, s.outlineStyle, s.outlineWidth, s.outlineColor]
+    })()
+    ```
+    Expected: `specimen-link`, `solid`, `4px`, `rgb(73, 117, 233)`.
 3. Press `Tab` once more to focus `#specimen-button`, and run:
-   ```js
-   (() => { const s = getComputedStyle(document.activeElement); return [document.activeElement.id, s.backgroundColor, s.boxShadow, s.outlineStyle]; })()
-   ```
-   Expected: `specimen-button`, `rgb(70, 124, 209)`, a shadow of `rgb(0, 0, 0) 4px 4px 0px 0px`, and `none`.
+    ```js
+    ;(() => {
+        const s = getComputedStyle(document.activeElement)
+        return [document.activeElement.id, s.backgroundColor, s.boxShadow, s.outlineStyle]
+    })()
+    ```
+    Expected: `specimen-button`, `rgb(70, 124, 209)`, a shadow of `rgb(0, 0, 0) 4px 4px 0px 0px`, and `none`.
 4. Take a full-page screenshot of the specimen at the default width as visual evidence of Lova, Space Grotesk, the swatches and the shadows.
 
 - [ ] **Step 6: Clean up and confirm the tree is clean**
