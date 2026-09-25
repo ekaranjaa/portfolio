@@ -165,19 +165,7 @@ export const portfolio = {
                 period: 'Oct 2025 - Present',
                 description:
                     'Built Elimu Bora ERP from the ground up, owning product strategy, UI/UX, engineering, and go-to-market. Architected the multi-tenant SaaS platform and shipped core school workflows covering academics, finance, attendance, and parent engagement.',
-                technologies: [
-                    'PHP',
-                    'Laravel',
-                    'Filament',
-                    'Vue.js',
-                    'Alpine.js',
-                    'Inertia.js',
-                    'PostgreSQL',
-                    'DigitalOcean',
-                    'Laravel Forge',
-                    'Cloudflare Workers',
-                    'Tailwind CSS',
-                ],
+                technologies: ['Laravel & Filament', 'TS & Vue.js', 'PostgreSQL', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -185,16 +173,7 @@ export const portfolio = {
                 period: 'Jul 2023 - Jan 2026',
                 description:
                     'Led product design and development for a platform serving 250k+ registered users. Redesigned core experiences, increasing conversion and engagement by 30%, improved search with Algolia, and shipped a new marketplace feature.',
-                technologies: [
-                    'PHP',
-                    'Laravel',
-                    'JavaScript',
-                    'Vue.js',
-                    'MySQL',
-                    'Tailwind CSS',
-                    'Algolia',
-                    'Figma',
-                ],
+                technologies: ['Laravel', 'JS & Vue.js', 'MySQL', 'Algolia', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -202,17 +181,7 @@ export const portfolio = {
                 period: 'Feb 2023 - Jun 2023',
                 description:
                     'Worked directly with the founders to shape the product and deliver rapid iterations that helped onboard the company’s first three paying clients. Led frontend development while contributing to backend services and product UX.',
-                technologies: [
-                    'PHP',
-                    'Laravel',
-                    'JavaScript',
-                    'Vue.js',
-                    'NestJS',
-                    'MySQL',
-                    'Tailwind CSS',
-                    'Adobe XD',
-                    'Figma',
-                ],
+                technologies: ['Laravel', 'Angular.js', 'NestJS', 'MySQL', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -220,16 +189,7 @@ export const portfolio = {
                 period: 'May 2021 - Feb 2023',
                 description:
                     'Designed and built products across fintech, real estate, NFTs, gaming, and logistics, including a finance app serving 20k+ users. Owned UI/UX on several products while contributing to Laravel backend development, SEO, and performance.',
-                technologies: [
-                    'PHP',
-                    'Laravel',
-                    'JavaScript',
-                    'Vue.js',
-                    'MySQL',
-                    'Tailwind CSS',
-                    'Adobe XD',
-                    'Figma',
-                ],
+                technologies: ['Laravel', 'Vue.js', 'MySQL', 'Figma'],
             },
             {
                 role: 'IT Intern',
@@ -237,15 +197,7 @@ export const portfolio = {
                 period: 'Feb 2020 - May 2020',
                 description:
                     'Supported database development, frontend implementation, UI prototyping, and SEO across client projects while working alongside the engineering team.',
-                technologies: [
-                    'PHP',
-                    'Laravel',
-                    'JavaScript',
-                    'MySQL',
-                    'HTML',
-                    'CSS',
-                    'Tailwind CSS',
-                ],
+                technologies: ['Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
             },
         ] satisfies Job[],
     },
@@ -323,17 +275,8 @@ export const portfolio = {
         label: 'Testimonials',
         items: [
             {
-                name: 'Eva Mwangi',
-                title: 'Software Engineer',
-                date: 'December 2, 2025',
-                relationship: 'Eva worked with Emmanuel on the same team',
-                quote: [
-                    'During our time working side-by-side on the front-end team, Emmanuel consistently demonstrated a deep technical understanding of modern web standards, component-based architecture, and best practices in Vue.js/Laravel technologies. I have been fortunate to witness the exceptional learning ability while he trained on becoming a designer. I personally can attest to the quality of his work, where he leverages his engineering background to ensure his designs are not only visually excellent but also highly efficient and feasible to implement.',
-                ],
-            },
-            {
                 name: 'Julian Gums',
-                title: 'CTO | AI Enthusiast | Fintech Expert | Software Engineer | Problem Solver',
+                title: 'CTO at Flinq',
                 date: 'October 3, 2025',
                 relationship: 'Julian managed Emmanuel directly',
                 quote: [
@@ -342,7 +285,7 @@ export const portfolio = {
             },
             {
                 name: 'Benjamin Gakami',
-                title: 'Senior Software Engineer · Laravel · Vue.js · Flutter · AWS · DevOps',
+                title: 'CTO at Syntanic',
                 date: 'September 29, 2025',
                 relationship: 'Benjamin managed Emmanuel directly',
                 quote: [
@@ -353,11 +296,22 @@ export const portfolio = {
             },
             {
                 name: 'Brian Ireri',
-                title: 'Software Engineer',
+                title: 'Co-Founder & Software Engineer at CodeBreeze Ltd',
                 date: 'September 27, 2025',
                 relationship: 'Brian worked with Emmanuel on the same team',
                 quote: [
-                    'I had the privilege of working with Emmanuel, and I can attest to his outstanding expertise as a UI/UX designer with solid web development skills in Vue.js and Laravel. He consistently demonstrates professionalism, excellent communication, and reliability in meeting deadlines. Emmanuel excels at understanding requirements and transforming them into well-thought-out, user-friendly solutions. His design skills are truly exceptional, and any team would be fortunate to have him as a contributor.',
+                    'I had the privilege of working with Emmanuel, and I can attest to his outstanding expertise as a UI/UX designer with solid web development skills in Vue.js and Laravel. He consistently demonstrates professionalism, excellent communication, and reliability in meeting deadlines.',
+                    'Emmanuel excels at understanding requirements and transforming them into well-thought-out, user-friendly solutions. His design skills are truly exceptional, and any team would be fortunate to have him as a contributor.',
+                ],
+            },
+            {
+                name: 'Eva Mwangi',
+                title: 'Software Engineer at Trippz',
+                date: 'December 2, 2025',
+                relationship: 'Eva worked with Emmanuel on the same team',
+                quote: [
+                    'During our time working side-by-side on the front-end team, Emmanuel consistently demonstrated a deep technical understanding of modern web standards, component-based architecture, and best practices in Vue.js/Laravel technologies.',
+                    'I have been fortunate to witness the exceptional learning ability while he trained on becoming a designer. I personally can attest to the quality of his work, where he leverages his engineering background to ensure his designs are not only visually excellent but also highly efficient and feasible to implement.',
                 ],
             },
         ] satisfies Testimonial[],
