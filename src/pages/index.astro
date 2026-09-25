@@ -1,5 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import HeroSection from '@/components/HeroSection.vue'
+import ServicesMarquee from '@/components/ServicesMarquee.vue'
+import AboutSection from '@/components/AboutSection.vue'
+import ExperienceSection from '@/components/ExperienceSection.vue'
+import WorkSection from '@/components/WorkSection.vue'
+import TestimonialsSection from '@/components/TestimonialsSection.vue'
 ---
 
-<Layout />
+<BaseLayout>
+    <HeroSection client:load />
+    <ServicesMarquee />
+    <AboutSection />
+    <ExperienceSection client:visible />
+    <WorkSection />
+    <TestimonialsSection client:visible />
+</BaseLayout>
