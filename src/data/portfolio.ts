@@ -139,8 +139,10 @@ export const portfolio = {
 
     experience: {
         heading: 'Where I’ve worked',
-        // TODO: replace '#' with the resume URL.
-        resume: { label: 'View full resume', href: '#' } satisfies Link,
+        resume: {
+            label: 'View full resume',
+            href: '/documents/Emmanuel Karanja Resume.pdf',
+        } satisfies Link,
         jobs: [
             {
                 role: 'Founder & CTO',
@@ -240,10 +242,9 @@ export const portfolio = {
         items: [
             {
                 name: 'Elimu Bora ERP',
-                // TODO: the design reuses Sales Zote's description here; replace it with Elimu Bora ERP's own.
                 description:
-                    'Sales Zote is a cloud-based POS and inventory management system built to streamline operations for retail, wholesale, and growing chain businesses.',
-                href: '#', // TODO: project URL
+                    'Elimu Bora ERP is a school management platform built for Kenyan schools, bringing academics, attendance, fees, inventory, and parent communication together in one system.',
+                href: 'https://elimuboraerp.com',
                 color: '#880000',
                 dark: true,
             },
@@ -251,7 +252,7 @@ export const portfolio = {
                 name: 'Sales Zote',
                 description:
                     'Sales Zote is a cloud-based POS and inventory management system built to streamline operations for retail, wholesale, and growing chain businesses.',
-                href: '#', // TODO: project URL
+                href: 'https://saleszote.com',
                 color: '#fdba1b',
                 dark: false,
             },
@@ -259,7 +260,7 @@ export const portfolio = {
                 name: 'Hovit',
                 description:
                     'Hovit is a feature-rich house-hunting app designed to simplify every step of the renting journey. It entails 4 platforms; Hovit App, H Agent App and H Mover App and a web platform.',
-                href: '#', // TODO: project URL
+                href: 'https://hovit.co.ke',
                 color: '#059669',
                 dark: true,
             },
@@ -267,7 +268,7 @@ export const portfolio = {
                 name: 'Mr Ticketz',
                 description:
                     'MR TICKETZ is a modern ticketing platform with a dedicated mobile app designed specifically for event promoters.',
-                href: '#', // TODO: project URL
+                href: 'https://mrticketz.com',
                 color: '#dc2626',
                 dark: true,
             },
@@ -339,9 +340,19 @@ export const portfolio = {
     },
 
     socials: [
-        // TODO: replace each '#' with the profile URL.
-        { id: 'github', label: 'GitHub', href: '#', icon: markRaw(GithubIcon) },
-        { id: 'linkedin', label: 'LinkedIn', href: '#', icon: markRaw(LinkedinIcon) },
+        {
+            id: 'github',
+            label: 'GitHub',
+            href: 'https://github.com/ekaranjaa',
+            icon: markRaw(GithubIcon),
+        },
+        {
+            id: 'linkedin',
+            label: 'LinkedIn',
+            href: 'https://linkedin.com/in/ekaranjaa',
+            icon: markRaw(LinkedinIcon),
+        },
+        // TODO: replace '#' with the Instagram profile URL.
         { id: 'instagram', label: 'Instagram', href: '#', icon: markRaw(InstagramIcon) },
     ] satisfies Social[],
 }
