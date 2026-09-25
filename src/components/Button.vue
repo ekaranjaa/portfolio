@@ -29,11 +29,10 @@
         instagram: 'bg-instagram text-white',
     }
 
-    // Icons inside the button are sized here so call sites never repeat it.
     const SIZE_CLASSES = {
-        sm: 'text-2xl [&_svg]:size-6',
-        md: 'text-3xl [&_svg]:size-8',
-        lg: 'text-4xl [&_svg]:size-10',
+        sm: 'text-2xl',
+        md: 'text-3xl',
+        lg: 'text-4xl',
     } as const
 
     const PADDING_CLASSES = {
@@ -47,6 +46,9 @@
     const paddingClasses = computed(() =>
         props.iconOnly ? 'p-3.5 lg:p-5' : PADDING_CLASSES[props.size],
     )
+    // Icons are sized here so call sites never repeat it: beside a label they match its font
+    // size, as in the design; on their own they stay at the design's 40px.
+    const iconClasses = computed(() => (props.iconOnly ? '[&_svg]:size-10' : '[&_svg]:size-[1em]'))
 </script>
 
 <template>
@@ -55,7 +57,7 @@
         :href="href"
         :type="href ? undefined : type"
         class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border-4 border-black font-display uppercase shadow-md outline-hidden transition hover:bg-blue-accent hover:shadow-sm focus-visible:bg-blue-accent focus-visible:shadow-sm"
-        :class="[colorClasses, sizeClasses, paddingClasses]"
+        :class="[colorClasses, sizeClasses, paddingClasses, iconClasses]"
     >
         <slot />
         <slot name="trailing" />
