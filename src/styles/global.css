@@ -28,6 +28,15 @@
     --text-4xl: clamp(2rem, 1.8123rem + 0.7641vw, 2.5rem); /* 32 → 40 */
     --text-4xl--line-height: 1.4;
     --text-8xl: clamp(6.125rem, 5.7966rem + 1.3372vw, 7rem); /* 98 → 112 */
+
+    /* The services marquee renders its list twice, so shifting by half loops seamlessly */
+    --animate-marquee: marquee 40s linear infinite;
+
+    @keyframes marquee {
+        to {
+            transform: translateX(-50%);
+        }
+    }
 }
 
 @theme inline {
