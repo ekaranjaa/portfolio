@@ -30,6 +30,11 @@
   --text-8xl: clamp(6.125rem, 5.7966rem + 1.3372vw, 7rem);     /* 98 → 112 */
 }
 
+@theme inline {
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-lova);
+}
+
 @layer base {
   /* Focus/Blue ring for links and everything else; buttons opt out with outline-hidden */
   :focus-visible { outline: 4px solid var(--color-focus); outline-offset: 2px; }
