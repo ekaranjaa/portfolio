@@ -55,6 +55,18 @@ export interface Testimonial {
 /** Every "Let's talk" button except the footer's scrolls to the contact footer. */
 const letsTalk: Link = { label: 'Let’s talk', href: '#contact' }
 
+/** Project sites, shared by the project cards and the links in the About copy. */
+const projectUrls = {
+    elimuBora: 'https://elimuboraerp.com',
+    salesZote: 'https://saleszote.com',
+    hovit: 'https://hovit.co.ke',
+    mrTicketz: 'https://mrticketz.com',
+}
+
+/** An inline link for the HTML paragraphs, opening in a new tab like the project buttons. */
+const externalLink = (label: string, href: string) =>
+    `<a href="${href}" target="_blank" rel="noopener">${label}</a>`
+
 export const portfolio = {
     site: {
         name: 'Emmanuel Karanja',
@@ -105,7 +117,7 @@ export const portfolio = {
         /** Paragraphs are HTML, rendered with v-html, so they can carry <strong> and <a>. */
         paragraphs: [
             'Hi, I’m Emmanuel. I’m a <strong>product designer and software engineer</strong> who enjoys turning ideas into digital products, working at the intersection of design and engineering where I can think about how something should work, how it should feel, and then actually build it.',
-            'I’m currently the Founder & CTO of Elimu Bora, where I’ve taken our school management platform from an idea to a production SaaS product, working across product, design, engineering, and everything in between. I’ve also designed products like <a href="#work">Sales Zote</a>, <a href="#work">Mr Ticketz</a> and <a href="#work">Hovit</a>.',
+            `I’m currently the Founder & CTO of Elimu Bora, where I’ve taken our school management platform from an idea to a production SaaS product, working across product, design, engineering, and everything in between. I’ve also designed products like ${externalLink('Sales Zote', projectUrls.salesZote)}, ${externalLink('Mr Ticketz', projectUrls.mrTicketz)} and ${externalLink('Hovit', projectUrls.hovit)}.`,
             'Outside of work, I’m usually exploring new ideas, experimenting with technology, working on side projects, or trying to make whatever I’m building a little better than it was yesterday.',
         ],
     },
@@ -245,7 +257,7 @@ export const portfolio = {
                 name: 'Elimu Bora ERP',
                 description:
                     'Elimu Bora ERP is a school management platform built for Kenyan schools, bringing academics, attendance, fees, inventory, and parent communication together in one system.',
-                href: 'https://elimuboraerp.com',
+                href: projectUrls.elimuBora,
                 color: '#880000',
                 dark: true,
             },
@@ -253,7 +265,7 @@ export const portfolio = {
                 name: 'Sales Zote',
                 description:
                     'Sales Zote is a cloud-based POS and inventory management system built to streamline operations for retail, wholesale, and growing chain businesses.',
-                href: 'https://saleszote.com',
+                href: projectUrls.salesZote,
                 color: '#fdba1b',
                 dark: false,
             },
@@ -261,7 +273,7 @@ export const portfolio = {
                 name: 'Hovit',
                 description:
                     'Hovit is a feature-rich house-hunting app designed to simplify every step of the renting journey. It entails 4 platforms; Hovit App, H Agent App and H Mover App and a web platform.',
-                href: 'https://hovit.co.ke',
+                href: projectUrls.hovit,
                 color: '#059669',
                 dark: true,
             },
@@ -269,7 +281,7 @@ export const portfolio = {
                 name: 'Mr Ticketz',
                 description:
                     'MR TICKETZ is a modern ticketing platform with a dedicated mobile app designed specifically for event promoters.',
-                href: 'https://mrticketz.com',
+                href: projectUrls.mrTicketz,
                 color: '#dc2626',
                 dark: true,
             },
