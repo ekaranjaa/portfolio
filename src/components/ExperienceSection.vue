@@ -71,8 +71,9 @@
                 </div>
             </Card>
 
-            <!-- Every job renders in the same grid cell, so the card keeps the height of the
-                 longest one and nothing below it moves when switching companies. -->
+            <!-- On mobile only the selected job takes space, so the card hugs its content. From lg,
+                 every job renders in the same grid cell with the others invisible, so the card
+                 keeps the longest job's height and nothing below it moves when switching. -->
             <Card class="grid flex-1 p-6 lg:p-10">
                 <div
                     v-for="(job, index) in jobs"
@@ -81,8 +82,8 @@
                     role="tabpanel"
                     :aria-labelledby="`experience-tab-${index}`"
                     tabindex="0"
-                    class="col-start-1 row-start-1 flex flex-col justify-center gap-3 lg:gap-4"
-                    :class="{ invisible: index !== selected }"
+                    class="col-start-1 row-start-1 flex-col justify-center gap-3 lg:gap-4"
+                    :class="index === selected ? 'flex' : 'hidden lg:invisible lg:flex'"
                 >
                     <h3 class="text-2xl font-bold lg:text-3xl">{{ job.role }}</h3>
                     <p class="text-xl leading-relaxed font-medium opacity-70">{{ job.period }}</p>
