@@ -158,7 +158,7 @@
                     :src="hero.image.src"
                     :alt="hero.image.alt"
                     fetchpriority="high"
-                    class="absolute top-[-2.21%] left-0 h-[105.32%] w-[106.61%] max-w-none"
+                    class="-ml-2 -mt-2 w-full"
                 />
             </div>
 
