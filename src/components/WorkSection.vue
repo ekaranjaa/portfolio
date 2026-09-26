@@ -35,6 +35,9 @@
                     target="_blank"
                     rel="noopener"
                     class="w-full lg:w-auto lg:min-w-50 lg:self-start"
+                    data-ph-capture-attribute-link_type="project"
+                    data-ph-capture-attribute-placement="work"
+                    :data-ph-capture-attribute-project_name="featured.name"
                 >
                     {{ cta }}
                     <template #trailing><ArrowOutwardIcon /></template>
@@ -68,6 +71,9 @@
                     target="_blank"
                     rel="noopener"
                     class="w-full lg:w-auto lg:min-w-50 lg:self-start"
+                    data-ph-capture-attribute-link_type="project"
+                    data-ph-capture-attribute-placement="work"
+                    :data-ph-capture-attribute-project_name="project.name"
                 >
                     {{ cta }}
                     <template #trailing><ArrowOutwardIcon /></template>

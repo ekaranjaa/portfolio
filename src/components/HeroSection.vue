@@ -129,7 +129,14 @@
             </div>
 
             <div class="flex flex-col gap-6 md:flex-row">
-                <Button :href="hero.cta.href" class="md:flex-1">{{ hero.cta.label }}</Button>
+                <Button
+                    :href="hero.cta.href"
+                    class="md:flex-1"
+                    data-ph-capture-attribute-link_type="contact"
+                    data-ph-capture-attribute-placement="hero"
+                >
+                    {{ hero.cta.label }}
+                </Button>
                 <div class="flex gap-6">
                     <Button
                         v-for="social in socials"
@@ -141,6 +148,9 @@
                         rel="noopener"
                         :aria-label="social.label"
                         class="flex-1 md:flex-none"
+                        data-ph-capture-attribute-link_type="social"
+                        data-ph-capture-attribute-placement="hero"
+                        :data-ph-capture-attribute-platform="social.id"
                     >
                         <component :is="social.icon" />
                     </Button>

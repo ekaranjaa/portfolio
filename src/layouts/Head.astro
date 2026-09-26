@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets'
+import PostHog from '@/components/posthog.astro'
 import { portfolio } from '@/data/portfolio.ts'
 
 interface Props {
@@ -91,4 +92,5 @@ const structuredData = {
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <PostHog />
 </head>

@@ -67,9 +67,12 @@ const projectUrls = {
     mrTicketz: 'https://mrticketz.com',
 }
 
-/** An inline link for the HTML paragraphs, opening in a new tab like the project buttons. */
+/**
+ * An inline project link for the HTML paragraphs. It opens in a new tab and carries the same
+ * PostHog labels as the project buttons.
+ */
 const externalLink = (label: string, href: string) =>
-    `<a href="${href}" target="_blank" rel="noopener">${label}</a>`
+    `<a href="${href}" target="_blank" rel="noopener" data-ph-capture-attribute-link_type="project" data-ph-capture-attribute-placement="about" data-ph-capture-attribute-project_name="${label}">${label}</a>`
 
 export const portfolio = {
     site: {
