@@ -11,12 +11,35 @@
 
     let observer: IntersectionObserver | undefined
 
+    /** Sections already reported to PostHog, so each counts once per visit. */
+    const viewedSections = new Set<string>()
+    let pendingSection: string | undefined
+    let viewTimer: ReturnType<typeof setTimeout> | undefined
+
+    // A section counts as viewed once it stays current for a second, so scrolling past doesn't.
+    function trackSectionView(section: string, current: boolean) {
+        if (!current) {
+            if (section === pendingSection) clearTimeout(viewTimer)
+            return
+        }
+
+        clearTimeout(viewTimer)
+        pendingSection = section
+        if (viewedSections.has(section)) return
+
+        viewTimer = setTimeout(() => {
+            viewedSections.add(section)
+            window.posthog?.capture('section_viewed', { section })
+        }, 1000)
+    }
+
     onMounted(() => {
         // A section becomes current once it crosses the middle of the viewport.
         observer = new IntersectionObserver(
             (entries) => {
                 for (const entry of entries) {
                     if (entry.isIntersecting) activeHref.value = `#${entry.target.id}`
+                    trackSectionView(entry.target.id, entry.isIntersecting)
                 }
             },
             { rootMargin: '-50% 0px -50% 0px' },
@@ -28,7 +51,10 @@
         }
     })
 
-    onUnmounted(() => observer?.disconnect())
+    onUnmounted(() => {
+        observer?.disconnect()
+        clearTimeout(viewTimer)
+    })
 </script>
 
 <template>
@@ -57,12 +83,27 @@
 
             <!-- The CTA changes size at the breakpoint, so each size gets its own instance. -->
             <div class="hidden lg:block">
-                <Button :href="cta.href" color="white" size="md" class="w-50">
+                <Button
+                    :href="cta.href"
+                    color="white"
+                    size="md"
+                    class="w-50"
+                    data-ph-capture-attribute-link_type="contact"
+                    data-ph-capture-attribute-placement="navigation"
+                >
                     {{ cta.label }}
                 </Button>
             </div>
             <div class="lg:hidden">
-                <Button :href="cta.href" color="white" size="sm">{{ cta.label }}</Button>
+                <Button
+                    :href="cta.href"
+                    color="white"
+                    size="sm"
+                    data-ph-capture-attribute-link_type="contact"
+                    data-ph-capture-attribute-placement="navigation"
+                >
+                    {{ cta.label }}
+                </Button>
             </div>
         </div>
     </header>

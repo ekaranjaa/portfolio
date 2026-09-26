@@ -29,8 +29,17 @@
         else return
 
         event.preventDefault()
-        selected.value = next
+        selectExperience(next, 'keyboard')
         tabs[next]?.focus()
+    }
+
+    function selectExperience(index: number, selectionMethod: 'click' | 'keyboard') {
+        if (index === selected.value) return
+        selected.value = index
+        window.posthog?.capture('experience_selected', {
+            selection_method: selectionMethod,
+            position: index + 1,
+        })
     }
 </script>
 
@@ -63,7 +72,7 @@
                                 ? 'font-bold text-blue-accent'
                                 : 'opacity-60 hover:opacity-100'
                         "
-                        @click="selected = index"
+                        @click="selectExperience(index, 'click')"
                     >
                         <span class="flex-1">{{ job.company }}</span>
                         <ChevronRightIcon v-if="index === selected" class="size-10 shrink-0" />
@@ -102,6 +111,8 @@
             target="_blank"
             rel="noopener"
             class="w-full"
+            data-ph-capture-attribute-link_type="resume"
+            data-ph-capture-attribute-placement="experience"
         >
             {{ resume.label }}
             <template #trailing><ArrowOutwardIcon /></template>

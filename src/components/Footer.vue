@@ -21,7 +21,12 @@
         </div>
 
         <div class="flex w-full flex-col gap-6 lg:w-auto">
-            <Button :href="contact.cta.href" class="w-full lg:w-78">
+            <Button
+                :href="contact.cta.href"
+                class="w-full lg:w-78"
+                data-ph-capture-attribute-link_type="contact"
+                data-ph-capture-attribute-placement="footer"
+            >
                 {{ contact.cta.label }}
             </Button>
             <div class="flex gap-6">
@@ -35,6 +40,9 @@
                     rel="noopener"
                     :aria-label="social.label"
                     class="flex-1 lg:flex-none"
+                    data-ph-capture-attribute-link_type="social"
+                    data-ph-capture-attribute-placement="footer"
+                    :data-ph-capture-attribute-platform="social.id"
                 >
                     <component :is="social.icon" />
                 </Button>

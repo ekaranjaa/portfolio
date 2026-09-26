@@ -14,11 +14,21 @@
 
     // The arrows use aria-disabled rather than disabled so they keep keyboard focus at either end.
     function previous() {
-        if (!atStart.value) current.value--
+        if (atStart.value) return
+        current.value--
+        window.posthog?.capture('testimonial_navigated', {
+            direction: 'previous',
+            position: current.value + 1,
+        })
     }
 
     function next() {
-        if (!atEnd.value) current.value++
+        if (atEnd.value) return
+        current.value++
+        window.posthog?.capture('testimonial_navigated', {
+            direction: 'next',
+            position: current.value + 1,
+        })
     }
 
     const ARROW_CLASSES =

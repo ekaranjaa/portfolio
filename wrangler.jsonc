@@ -1,7 +1,7 @@
 // The site is fully static, so it deploys as Workers static assets with no adapter or Worker script.
 // https://docs.astro.build/en/guides/deploy/cloudflare/
 {
-    "name": "portfolio-v3",
+    "name": "portfolio",
     "compatibility_date": "2026-09-26",
     "assets": {
         "directory": "./dist",
