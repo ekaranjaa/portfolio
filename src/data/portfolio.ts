@@ -285,7 +285,7 @@ export const portfolio = {
             },
             {
                 name: 'Benjamin Gakami',
-                title: 'CTO at Syntanic',
+                title: 'CTO at Sales Zote',
                 date: 'September 29, 2025',
                 relationship: 'Benjamin managed Emmanuel directly',
                 quote: [
