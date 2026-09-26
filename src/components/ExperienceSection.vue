@@ -38,13 +38,13 @@
     <section id="experience" class="container mx-auto flex flex-col gap-6 px-6 py-10 lg:gap-10">
         <h2 class="font-display text-8xl uppercase">{{ heading }}</h2>
 
-        <div class="flex flex-col gap-6 lg:flex-row lg:gap-10">
-            <Card class="p-6 lg:w-105 lg:shrink-0 lg:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 w-full">
+            <Card class="p-6 lg:col-span-5 lg:p-10">
                 <div
                     role="tablist"
                     aria-label="Companies"
                     aria-orientation="vertical"
-                    class="flex flex-col gap-8"
+                    class="flex flex-col gap-6 lg:gap-8"
                     @keydown="onKeydown"
                 >
                     <button
@@ -71,10 +71,7 @@
                 </div>
             </Card>
 
-            <!-- On mobile only the selected job takes space, so the card hugs its content. From lg,
-                 every job renders in the same grid cell with the others invisible, so the card
-                 keeps the longest job's height and nothing below it moves when switching. -->
-            <Card class="grid flex-1 p-6 lg:p-10">
+            <Card class="p-6 lg:col-span-7 lg:p-10">
                 <div
                     v-for="(job, index) in jobs"
                     :id="`experience-panel-${index}`"
@@ -82,8 +79,8 @@
                     role="tabpanel"
                     :aria-labelledby="`experience-tab-${index}`"
                     tabindex="0"
-                    class="col-start-1 row-start-1 flex-col justify-center gap-3 lg:gap-4"
-                    :class="index === selected ? 'flex' : 'hidden lg:invisible lg:flex'"
+                    class="flex-col justify-center gap-3 lg:gap-4 h-max"
+                    :class="index === selected ? 'flex' : 'hidden'"
                 >
                     <h3 class="text-2xl font-bold lg:text-3xl">{{ job.role }}</h3>
                     <p class="text-xl leading-relaxed font-medium opacity-70">{{ job.period }}</p>

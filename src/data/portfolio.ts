@@ -55,7 +55,7 @@ export interface Testimonial {
 }
 
 /** Every "Let's talk" button except the footer's scrolls to the contact footer. */
-const letsTalk: Link = { label: 'Let’s talk', href: '#contact' }
+const letsTalk: Link = { label: 'Let’s talk', href: 'mailto:karanjaemmanuel8@gmail.com' }
 
 /** Project sites, shared by the project cards and the links in the About copy. */
 const projectUrls = {
@@ -156,7 +156,7 @@ export const portfolio = {
         heading: 'Where I’ve worked',
         resume: {
             label: 'View full resume',
-            href: '/documents/Emmanuel Karanja Resume.pdf',
+            href: '/documents/Emmanuel-Karanja-Resume.pdf',
         } satisfies Link,
         jobs: [
             {
@@ -165,7 +165,7 @@ export const portfolio = {
                 period: 'Oct 2025 - Present',
                 description:
                     'Built Elimu Bora ERP from the ground up, owning product strategy, UI/UX, engineering, and go-to-market. Architected the multi-tenant SaaS platform and shipped core school workflows covering academics, finance, attendance, and parent engagement.',
-                technologies: ['Laravel & Filament', 'TS & Vue.js', 'PostgreSQL', 'Figma'],
+                technologies: ['Laravel', 'TypeScript', 'Vue.js', 'PostgreSQL', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -173,7 +173,7 @@ export const portfolio = {
                 period: 'Jul 2023 - Jan 2026',
                 description:
                     'Led product design and development for a platform serving 250k+ registered users. Redesigned core experiences, increasing conversion and engagement by 30%, improved search with Algolia, and shipped a new marketplace feature.',
-                technologies: ['Laravel', 'JS & Vue.js', 'MySQL', 'Algolia', 'Figma'],
+                technologies: ['Laravel', 'Vue.js', 'MySQL', 'Algolia', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -181,7 +181,7 @@ export const portfolio = {
                 period: 'Feb 2023 - Jun 2023',
                 description:
                     'Worked directly with the founders to shape the product and deliver rapid iterations that helped onboard the company’s first three paying clients. Led frontend development while contributing to backend services and product UX.',
-                technologies: ['Laravel', 'Angular.js', 'NestJS', 'MySQL', 'Figma'],
+                technologies: ['NestJS', 'Typescript', 'Angular', 'MySQL', 'Figma'],
             },
             {
                 role: 'Full Stack Web Developer & UI/UX Designer',
@@ -197,7 +197,7 @@ export const portfolio = {
                 period: 'Feb 2020 - May 2020',
                 description:
                     'Supported database development, frontend implementation, UI prototyping, and SEO across client projects while working alongside the engineering team.',
-                technologies: ['Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
+                technologies: ['Laravel', 'Vue.js', 'MySQL'],
             },
         ] satisfies Job[],
     },
@@ -324,8 +324,7 @@ export const portfolio = {
             'Got a problem worth solving, an idea worth building, or just want to talk shop?',
             'My inbox is open.',
         ],
-        // TODO: add the email address after mailto:
-        cta: { label: 'Let’s talk', href: 'mailto:' } satisfies Link,
+        cta: letsTalk,
     },
 
     socials: [
@@ -341,7 +340,11 @@ export const portfolio = {
             href: 'https://linkedin.com/in/ekaranjaa',
             icon: markRaw(LinkedinIcon),
         },
-        // TODO: replace '#' with the Instagram profile URL.
-        { id: 'instagram', label: 'Instagram', href: '#', icon: markRaw(InstagramIcon) },
+        {
+            id: 'instagram',
+            label: 'Instagram',
+            href: 'https://instagram.com/designs_by_karanja',
+            icon: markRaw(InstagramIcon),
+        },
     ] satisfies Social[],
 }
