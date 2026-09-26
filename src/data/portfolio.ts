@@ -54,8 +54,10 @@ export interface Testimonial {
     quote: string[]
 }
 
+const email = 'karanjaemmanuel8@gmail.com'
+
 /** Every "Let's talk" button except the footer's scrolls to the contact footer. */
-const letsTalk: Link = { label: 'Let’s talk', href: 'mailto:karanjaemmanuel8@gmail.com' }
+const letsTalk: Link = { label: 'Let’s talk', href: `mailto:${email}` }
 
 /** Project sites, shared by the project cards and the links in the About copy. */
 const projectUrls = {
@@ -74,8 +76,35 @@ export const portfolio = {
         name: 'Emmanuel Karanja',
         title: 'Emmanuel Karanja — Product Developer',
         description:
-            'I design and build digital products; bringing together product thinking, user experience, and engineering to turn ideas into useful, well-crafted software.',
+            'UI/UX Designer and Software Developer who designs and builds SaaS products, bringing together product thinking, user experience, and engineering.',
+        keywords: [
+            'Ekaranja',
+            'Emmanuel Karanja',
+            'Product Developer',
+            'Software Developer',
+            'Software Engineer',
+            'Full Stack Developer',
+            'Frontend Developer',
+            'Backend Developer',
+            'Laravel Developer',
+            'Vue.js Developer',
+            'UI/UX Designer',
+            'Product Designer',
+        ],
         credit: 'Designed & built by Emmanuel Karanja.',
+        email,
+        /** Not one of the social buttons; it credits X cards and joins the structured data. */
+        x: { handle: '@ekaranjaa', href: 'https://x.com/ekaranjaa' },
+        locale: 'en_KE',
+        /** The page background (primary at 20% over white), so the browser chrome blends in. */
+        themeColor: '#fdf3d9',
+        /** The link-preview card for social shares, at the 1200×630 Open Graph expects. */
+        ogImage: {
+            src: '/images/cover.png',
+            alt: 'Emmanuel Karanja, Product Developer',
+            width: 1200,
+            height: 630,
+        },
     },
 
     navigation: {
