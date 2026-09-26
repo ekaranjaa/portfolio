@@ -1,0 +1,12 @@
+// The site is fully static, so it deploys as Workers static assets with no adapter or Worker script.
+// https://docs.astro.build/en/guides/deploy/cloudflare/
+{
+    "name": "portfolio-v3",
+    "compatibility_date": "2026-09-26",
+    "assets": {
+        "directory": "./dist",
+    },
+    // Branch builds run `wrangler preview`, which requires this block even when it's empty.
+    // https://developers.cloudflare.com/workers/previews/configuration/
+    "previews": {},
+}
