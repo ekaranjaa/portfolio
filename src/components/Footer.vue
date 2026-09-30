@@ -49,6 +49,9 @@
             </div>
         </div>
 
-        <p class="text-base opacity-50">{{ site.credit }}</p>
+        <p
+            class="text-base text-black/50 [&_a]:border-b-2 [&_a]:border-black [&_a]:text-black"
+            v-html="site.credit"
+        />
     </footer>
 </template>
