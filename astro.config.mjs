@@ -31,7 +31,7 @@ export default defineConfig({
             cssVariable: '--font-lova',
             options: {
                 variants: [
-                    { src: ['./src/assets/fonts/LovaBold.otf'], weight: 400, style: 'normal' },
+                    { src: ['./src/assets/fonts/LovaBold.woff2'], weight: 400, style: 'normal' },
                 ],
             },
         },
