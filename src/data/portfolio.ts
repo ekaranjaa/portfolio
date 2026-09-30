@@ -156,7 +156,7 @@ export const portfolio = {
         /** Paragraphs are HTML, rendered with v-html, so they can carry <strong> and <a>. */
         paragraphs: [
             'Hi, I’m Emmanuel. I’m a <strong>product designer and software engineer</strong> who enjoys turning ideas into digital products, working at the intersection of design and engineering where I can think about how something should work, how it should feel, and then actually build it.',
-            `I’m currently the Founder & CTO of Elimu Bora, where I’ve taken our school management platform from an idea to a production SaaS product, working across product, design, engineering, and everything in between. I’ve also designed products like ${externalLink('Sales Zote', projectUrls.salesZote)}, ${externalLink('Mr Ticketz', projectUrls.mrTicketz)} and ${externalLink('Hovit', projectUrls.hovit)}.`,
+            `I’m currently the Founder & CTO of ${externalLink('Elimu Bora ERP', projectUrls.elimuBora)}, where I’ve taken our school management platform from an idea to a production SaaS product, working across product, design, engineering, and everything in between. I’ve also designed and worked on products like ${externalLink('Sales Zote', projectUrls.salesZote)}, ${externalLink('Mr Ticketz', projectUrls.mrTicketz)} and ${externalLink('Hovit', projectUrls.hovit)}.`,
             'Outside of work, I’m usually exploring new ideas, experimenting with technology, working on side projects, or trying to make whatever I’m building a little better than it was yesterday.',
         ],
     },
@@ -198,7 +198,7 @@ export const portfolio = {
         jobs: [
             {
                 role: 'Founder & CTO',
-                company: 'Elimu Bora Solutions Ltd',
+                company: 'Edara Technologies Ltd',
                 period: 'Oct 2025 - Present',
                 description:
                     'Built Elimu Bora ERP from the ground up, owning product strategy, UI/UX, engineering, and go-to-market. Architected the multi-tenant SaaS platform and shipped core school workflows covering academics, finance, attendance, and parent engagement.',
