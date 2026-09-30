@@ -74,6 +74,10 @@ const projectUrls = {
 const externalLink = (label: string, href: string) =>
     `<a href="${href}" target="_blank" rel="noopener" data-ph-capture-attribute-link_type="project" data-ph-capture-attribute-placement="about" data-ph-capture-attribute-project_name="${label}">${label}</a>`
 
+/** A footer credit link to the public design file or source code. It opens in a new tab. */
+const creditLink = (label: string, href: string) =>
+    `<a href="${href}" target="_blank" rel="noopener" data-ph-capture-attribute-link_type="credit" data-ph-capture-attribute-placement="footer">${label}</a>`
+
 export const portfolio = {
     site: {
         name: 'Emmanuel Karanja',
@@ -94,7 +98,8 @@ export const portfolio = {
             'UI/UX Designer',
             'Product Designer',
         ],
-        credit: 'Designed & built by Emmanuel Karanja.',
+        /** HTML: "Designed" links to the Figma file and "built" to the GitHub repo. */
+        credit: `${creditLink('Designed', 'https://www.figma.com/design/nIIK4RzmJN7VihZ2PgO3PP/Portfolio?node-id=0-1&t=muMxdEiN4GlMEpj9-1')} & ${creditLink('built', 'https://github.com/ekaranjaa/portfolio')} by Emmanuel Karanja.`,
         email,
         /** Not one of the social buttons; it credits X cards and joins the structured data. */
         x: { handle: '@ekaranjaa', href: 'https://x.com/ekaranjaa' },
